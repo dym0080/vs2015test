@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EDMXDemo", "EDMXDemo\EDMXDemo.csproj", "{4D3A694C-CCC7-42F4-99A6-88F3C4D94128}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EDMX.Models", "EDMX.Models\EDMX.Models.csproj", "{6F357A63-6882-4A4D-BD1C-801370CFDF89}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4D3A694C-CCC7-42F4-99A6-88F3C4D94128}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D3A694C-CCC7-42F4-99A6-88F3C4D94128}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D3A694C-CCC7-42F4-99A6-88F3C4D94128}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D3A694C-CCC7-42F4-99A6-88F3C4D94128}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F357A63-6882-4A4D-BD1C-801370CFDF89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F357A63-6882-4A4D-BD1C-801370CFDF89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F357A63-6882-4A4D-BD1C-801370CFDF89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F357A63-6882-4A4D-BD1C-801370CFDF89}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

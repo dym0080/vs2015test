@@ -1,0 +1,1198 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EDMX1.Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Brand">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BURegion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Key" Type="nvarchar" MaxLength="50" />
+          <Property Name="Value" Type="nvarchar(max)" />
+          <Property Name="ParentId" Type="int" Nullable="false" />
+          <Property Name="Bud Win" Type="int" />
+          <Property Name="Core+Win" Type="int" />
+          <Property Name="UP" Type="int" />
+          <Property Name="Bud TT" Type="int" />
+          <Property Name="Core+TT" Type="int" />
+        </EntityType>
+        <EntityType Name="ChannelType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Deleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MaterialGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="OrderId" Type="int" Nullable="false" />
+          <Property Name="SaleType" Type="nvarchar" MaxLength="50" />
+          <Property Name="ParentId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MaterialItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GroupId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="GoldUrl" Type="nvarchar" MaxLength="500" />
+          <Property Name="PlatUrl" Type="nvarchar" MaxLength="500" />
+          <Property Name="SilverUrl" Type="nvarchar" MaxLength="500" />
+          <Property Name="FamilyUrl" Type="nvarchar" MaxLength="500" />
+          <Property Name="SSUrl" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="NotifyMessage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="Message" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="IsRead" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Permission">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“tptoolkit.dbo.QueryProgram”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="QueryProgram">
+          <Key>
+            <PropertyRef Name="programid" />
+            <PropertyRef Name="myear" />
+          </Key>
+          <Property Name="programid" Type="int" Nullable="false" />
+          <Property Name="myear" Type="int" Nullable="false" />
+          <Property Name="eprogram" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“tptoolkit.dbo.QueryProgramBrand”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="QueryProgramBrand">
+          <Key>
+            <PropertyRef Name="programid" />
+            <PropertyRef Name="myear" />
+            <PropertyRef Name="brandid" />
+          </Key>
+          <Property Name="programid" Type="int" Nullable="false" />
+          <Property Name="myear" Type="int" Nullable="false" />
+          <Property Name="brandid" Type="int" Nullable="false" />
+          <Property Name="cbrand" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“tptoolkit.dbo.QueryVender”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="QueryVender">
+          <Key>
+            <PropertyRef Name="venderid" />
+          </Key>
+          <Property Name="venderid" Type="int" Nullable="false" />
+          <Property Name="vendername" Type="nvarchar" MaxLength="50" />
+          <Property Name="manager" Type="nvarchar" MaxLength="50" />
+          <Property Name="phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="bu" Type="nvarchar" MaxLength="50" />
+          <Property Name="region" Type="nvarchar" MaxLength="50" />
+          <Property Name="area" Type="nvarchar" MaxLength="50" />
+          <Property Name="office" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6013: 表/视图“tptoolkit.dbo.regiontest”未定义主键，并且无法推断有效的主键。已排除了此表/视图。若要使用实体，将需要检查您的架构、添加正确的键并取消对实体的注释。
+        <EntityType Name="regiontest">
+          <Property Name="Value" Type="nvarchar" MaxLength="100" />
+          <Property Name="Bud Win" Type="int" />
+          <Property Name="Core+Win" Type="int" />
+          <Property Name="UP" Type="int" />
+          <Property Name="Bud TT" Type="int" />
+          <Property Name="Core+TT" Type="int" />
+        </EntityType>-->
+        <EntityType Name="RejectUserPic">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="SalePointId" Type="int" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="OperationId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="RolePermission">
+          <Key>
+            <PropertyRef Name="RoleId" />
+            <PropertyRef Name="PermissionId" />
+          </Key>
+          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="PermissionId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SalePoint">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="CreatorId" Type="int" Nullable="false" />
+          <Property Name="Contact" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar" MaxLength="150" />
+          <Property Name="WCCS" Type="nvarchar" MaxLength="100" />
+          <Property Name="SalePointTypeId" Type="int" Nullable="false" />
+          <Property Name="ChannelTypeId" Type="int" Nullable="false" />
+          <Property Name="UpTypesID" Type="int" Nullable="false" />
+          <Property Name="MaterialStandard" Type="nvarchar(max)" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="UpdateTime" Type="datetime" Nullable="false" />
+          <Property Name="M1" Type="nvarchar" MaxLength="50" />
+          <Property Name="M2" Type="nvarchar" MaxLength="50" />
+          <Property Name="M3" Type="nvarchar" MaxLength="50" />
+          <Property Name="M4" Type="nvarchar" MaxLength="50" />
+          <Property Name="Capacity" Type="nvarchar" MaxLength="50" />
+          <Property Name="Brand" Type="int" Nullable="false" />
+          <Property Name="StartYearMonth" Type="nvarchar" MaxLength="50" />
+          <Property Name="Period" Type="nvarchar" MaxLength="50" />
+          <Property Name="EndYearMonth" Type="nvarchar" MaxLength="50" />
+          <Property Name="TerminationYearMonth" Type="nvarchar" MaxLength="50" />
+          <Property Name="VenderId" Type="int" Nullable="false" />
+          <Property Name="Region" Type="nvarchar" MaxLength="50" />
+          <Property Name="BU" Type="nvarchar" MaxLength="50" />
+          <Property Name="ContractNo" Type="nvarchar(max)" />
+          <Property Name="Code" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsHighEnd" Type="bit" Nullable="false" />
+          <Property Name="IsFinal" Type="int" Nullable="false" />
+          <Property Name="IsMTBRefuseCount" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SalePointFlow">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SalePointId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="SalePointStatus" Type="int" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="Message" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="SalePointPic">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SalePointId" Type="int" Nullable="false" />
+          <Property Name="Url" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="MaterialItemId" Type="int" Nullable="false" />
+          <Property Name="Message" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“tptoolkit.dbo.SalePointsCompare”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="SalePointsCompare">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Brand" />
+            <PropertyRef Name="Status" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ContractNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="BU" Type="nvarchar" MaxLength="50" />
+          <Property Name="Region" Type="nvarchar" MaxLength="50" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
+          <Property Name="ChannelType" Type="nvarchar" MaxLength="100" />
+          <Property Name="SalePointType" Type="nvarchar" MaxLength="100" />
+          <Property Name="Code" Type="nvarchar" MaxLength="50" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Address" Type="nvarchar" MaxLength="150" />
+          <Property Name="Capacity" Type="int" />
+          <Property Name="M1" Type="nvarchar" MaxLength="50" />
+          <Property Name="M2" Type="nvarchar" MaxLength="50" />
+          <Property Name="M3" Type="nvarchar" MaxLength="50" />
+          <Property Name="M4" Type="nvarchar" MaxLength="50" />
+          <Property Name="Brand" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="StartYearMonth" Type="nvarchar" MaxLength="50" />
+          <Property Name="EndYearMonth" Type="nvarchar" MaxLength="50" />
+          <Property Name="BeforeMonthCount" Type="int" />
+          <Property Name="TargetMonthCount" Type="int" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="IsNewPoint" Type="bit" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“tptoolkit.dbo.SalePointsCompareCopy”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="SalePointsCompareCopy">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Brand" />
+            <PropertyRef Name="Status" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ContractNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="BU" Type="nvarchar" MaxLength="50" />
+          <Property Name="Region" Type="nvarchar" MaxLength="50" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
+          <Property Name="ChannelType" Type="nvarchar" MaxLength="100" />
+          <Property Name="SalePointType" Type="nvarchar" MaxLength="100" />
+          <Property Name="Code" Type="nvarchar" MaxLength="50" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Address" Type="nvarchar" MaxLength="150" />
+          <Property Name="Capacity" Type="int" />
+          <Property Name="M1" Type="nvarchar" MaxLength="50" />
+          <Property Name="M2" Type="nvarchar" MaxLength="50" />
+          <Property Name="M3" Type="nvarchar" MaxLength="50" />
+          <Property Name="M4" Type="nvarchar" MaxLength="50" />
+          <Property Name="Brand" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="StartYearMonth" Type="nvarchar" MaxLength="50" />
+          <Property Name="EndYearMonth" Type="nvarchar" MaxLength="50" />
+          <Property Name="BeforeMonthCount" Type="int" />
+          <Property Name="TargetMonthCount" Type="int" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="IsNewPoint" Type="bit" />
+        </EntityType>
+        <EntityType Name="SalePointType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Deleted" Type="bit" Nullable="false" />
+          <Property Name="ChannelTypeId" Type="int" Nullable="false" />
+          <Property Name="BrandIds" Type="varchar" MaxLength="250" />
+          <Property Name="CHName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar(max)" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Position" Type="nvarchar" MaxLength="50" />
+          <Property Name="OpenId" Type="varchar" MaxLength="150" />
+          <Property Name="BU" Type="nvarchar" MaxLength="50" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="250" />
+          <Property Name="Deleted" Type="bit" Nullable="false" />
+          <Property Name="HeadUrl" Type="varchar" MaxLength="500" />
+          <Property Name="EmpNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Region" Type="nvarchar" MaxLength="50" />
+          <Property Name="SuperiorId" Type="int" />
+          <Property Name="FromID" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="UserFrom">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="FromID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreateAt" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserVender">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="VenderId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="VenderId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Vender">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="vCode" Type="nvarchar(max)" />
+          <Property Name="vName" Type="nvarchar(max)" />
+          <Property Name="vDesc" Type="nvarchar(max)" />
+          <Property Name="searchindex" Type="nvarchar(max)" />
+          <Property Name="Region" Type="nvarchar(max)" />
+          <Property Name="BU" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="VenderOrder">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VenderId" Type="int" Nullable="false" />
+          <Property Name="SalePointId" Type="int" Nullable="false" />
+          <Property Name="StoreData" Type="nvarchar(max)" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="DesignPic" Type="nvarchar(max)" />
+          <Property Name="OrderDoc" Type="nvarchar(max)" />
+          <Property Name="Deleted" Type="int" />
+          <Property Name="score" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityContainer Name="EDMX1ModelStoreContainer">
+          <EntitySet Name="Brand" EntityType="Self.Brand" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BURegion" EntityType="Self.BURegion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ChannelType" EntityType="Self.ChannelType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MaterialGroup" EntityType="Self.MaterialGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MaterialItem" EntityType="Self.MaterialItem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NotifyMessage" EntityType="Self.NotifyMessage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Permission" EntityType="Self.Permission" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RejectUserPic" EntityType="Self.RejectUserPic" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RolePermission" EntityType="Self.RolePermission" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SalePoint" EntityType="Self.SalePoint" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SalePointFlow" EntityType="Self.SalePointFlow" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SalePointPic" EntityType="Self.SalePointPic" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SalePointType" EntityType="Self.SalePointType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserFrom" EntityType="Self.UserFrom" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserVender" EntityType="Self.UserVender" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vender" EntityType="Self.Vender" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VenderOrder" EntityType="Self.VenderOrder" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QueryProgram" EntityType="Self.QueryProgram" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [QueryProgram].[programid] AS [programid], 
+    [QueryProgram].[myear] AS [myear], 
+    [QueryProgram].[eprogram] AS [eprogram]
+    FROM [dbo].[QueryProgram] AS [QueryProgram]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="QueryProgramBrand" EntityType="Self.QueryProgramBrand" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [QueryProgramBrand].[programid] AS [programid], 
+    [QueryProgramBrand].[myear] AS [myear], 
+    [QueryProgramBrand].[brandid] AS [brandid], 
+    [QueryProgramBrand].[cbrand] AS [cbrand]
+    FROM [dbo].[QueryProgramBrand] AS [QueryProgramBrand]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="QueryVender" EntityType="Self.QueryVender" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [QueryVender].[venderid] AS [venderid], 
+    [QueryVender].[vendername] AS [vendername], 
+    [QueryVender].[manager] AS [manager], 
+    [QueryVender].[phone] AS [phone], 
+    [QueryVender].[bu] AS [bu], 
+    [QueryVender].[region] AS [region], 
+    [QueryVender].[area] AS [area], 
+    [QueryVender].[office] AS [office]
+    FROM [dbo].[QueryVender] AS [QueryVender]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="SalePointsCompare" EntityType="Self.SalePointsCompare" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [SalePointsCompare].[Id] AS [Id], 
+    [SalePointsCompare].[ContractNo] AS [ContractNo], 
+    [SalePointsCompare].[BU] AS [BU], 
+    [SalePointsCompare].[Region] AS [Region], 
+    [SalePointsCompare].[City] AS [City], 
+    [SalePointsCompare].[ChannelType] AS [ChannelType], 
+    [SalePointsCompare].[SalePointType] AS [SalePointType], 
+    [SalePointsCompare].[Code] AS [Code], 
+    [SalePointsCompare].[Name] AS [Name], 
+    [SalePointsCompare].[Address] AS [Address], 
+    [SalePointsCompare].[Capacity] AS [Capacity], 
+    [SalePointsCompare].[M1] AS [M1], 
+    [SalePointsCompare].[M2] AS [M2], 
+    [SalePointsCompare].[M3] AS [M3], 
+    [SalePointsCompare].[M4] AS [M4], 
+    [SalePointsCompare].[Brand] AS [Brand], 
+    [SalePointsCompare].[StartYearMonth] AS [StartYearMonth], 
+    [SalePointsCompare].[EndYearMonth] AS [EndYearMonth], 
+    [SalePointsCompare].[BeforeMonthCount] AS [BeforeMonthCount], 
+    [SalePointsCompare].[TargetMonthCount] AS [TargetMonthCount], 
+    [SalePointsCompare].[Status] AS [Status], 
+    [SalePointsCompare].[IsNewPoint] AS [IsNewPoint]
+    FROM [dbo].[SalePointsCompare] AS [SalePointsCompare]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="SalePointsCompareCopy" EntityType="Self.SalePointsCompareCopy" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [SalePointsCompareCopy].[Id] AS [Id], 
+    [SalePointsCompareCopy].[ContractNo] AS [ContractNo], 
+    [SalePointsCompareCopy].[BU] AS [BU], 
+    [SalePointsCompareCopy].[Region] AS [Region], 
+    [SalePointsCompareCopy].[City] AS [City], 
+    [SalePointsCompareCopy].[ChannelType] AS [ChannelType], 
+    [SalePointsCompareCopy].[SalePointType] AS [SalePointType], 
+    [SalePointsCompareCopy].[Code] AS [Code], 
+    [SalePointsCompareCopy].[Name] AS [Name], 
+    [SalePointsCompareCopy].[Address] AS [Address], 
+    [SalePointsCompareCopy].[Capacity] AS [Capacity], 
+    [SalePointsCompareCopy].[M1] AS [M1], 
+    [SalePointsCompareCopy].[M2] AS [M2], 
+    [SalePointsCompareCopy].[M3] AS [M3], 
+    [SalePointsCompareCopy].[M4] AS [M4], 
+    [SalePointsCompareCopy].[Brand] AS [Brand], 
+    [SalePointsCompareCopy].[StartYearMonth] AS [StartYearMonth], 
+    [SalePointsCompareCopy].[EndYearMonth] AS [EndYearMonth], 
+    [SalePointsCompareCopy].[BeforeMonthCount] AS [BeforeMonthCount], 
+    [SalePointsCompareCopy].[TargetMonthCount] AS [TargetMonthCount], 
+    [SalePointsCompareCopy].[Status] AS [Status], 
+    [SalePointsCompareCopy].[IsNewPoint] AS [IsNewPoint]
+    FROM [dbo].[SalePointsCompareCopy] AS [SalePointsCompareCopy]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EDMX1.Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Brand">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BURegion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Key" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ParentId" Type="Int32" Nullable="false" />
+          <Property Name="Bud_Win" Type="Int32" />
+          <Property Name="Core_Win" Type="Int32" />
+          <Property Name="UP" Type="Int32" />
+          <Property Name="Bud_TT" Type="Int32" />
+          <Property Name="Core_TT" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ChannelType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MaterialGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OrderId" Type="Int32" Nullable="false" />
+          <Property Name="SaleType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ParentId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MaterialItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GroupId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="GoldUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="PlatUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="SilverUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="FamilyUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="SSUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="NotifyMessage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsRead" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Permission">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="RejectUserPic">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="SalePointId" Type="Int32" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="OperationId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="RolePermission">
+          <Key>
+            <PropertyRef Name="RoleId" />
+            <PropertyRef Name="PermissionId" />
+          </Key>
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="PermissionId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SalePoint">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreatorId" Type="Int32" Nullable="false" />
+          <Property Name="Contact" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="WCCS" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SalePointTypeId" Type="Int32" Nullable="false" />
+          <Property Name="ChannelTypeId" Type="Int32" Nullable="false" />
+          <Property Name="UpTypesID" Type="Int32" Nullable="false" />
+          <Property Name="MaterialStandard" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="M1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="M2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="M3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="M4" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Capacity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Brand" Type="Int32" Nullable="false" />
+          <Property Name="StartYearMonth" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Period" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EndYearMonth" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TerminationYearMonth" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="VenderId" Type="Int32" Nullable="false" />
+          <Property Name="Region" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BU" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ContractNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsHighEnd" Type="Boolean" Nullable="false" />
+          <Property Name="IsFinal" Type="Int32" Nullable="false" />
+          <Property Name="IsMTBRefuseCount" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SalePointFlow">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SalePointId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="SalePointStatus" Type="Int32" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Message" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SalePointPic">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SalePointId" Type="Int32" Nullable="false" />
+          <Property Name="Url" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="MaterialItemId" Type="Int32" Nullable="false" />
+          <Property Name="Message" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SalePointType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
+          <Property Name="ChannelTypeId" Type="Int32" Nullable="false" />
+          <Property Name="BrandIds" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="CHName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DisplayName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Position" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OpenId" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="BU" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
+          <Property Name="HeadUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="EmpNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Region" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SuperiorId" Type="Int32" />
+          <Property Name="FromID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="UserFrom">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="FromID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreateAt" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserVender">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="VenderId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="VenderId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Vender">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="vCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="vName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="vDesc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="searchindex" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Region" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BU" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="VenderOrder">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VenderId" Type="Int32" Nullable="false" />
+          <Property Name="SalePointId" Type="Int32" Nullable="false" />
+          <Property Name="StoreData" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="DesignPic" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OrderDoc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Deleted" Type="Int32" />
+          <Property Name="score" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="QueryProgram">
+          <Key>
+            <PropertyRef Name="programid" />
+            <PropertyRef Name="myear" />
+          </Key>
+          <Property Name="programid" Type="Int32" Nullable="false" />
+          <Property Name="myear" Type="Int32" Nullable="false" />
+          <Property Name="eprogram" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="QueryProgramBrand">
+          <Key>
+            <PropertyRef Name="programid" />
+            <PropertyRef Name="myear" />
+            <PropertyRef Name="brandid" />
+          </Key>
+          <Property Name="programid" Type="Int32" Nullable="false" />
+          <Property Name="myear" Type="Int32" Nullable="false" />
+          <Property Name="brandid" Type="Int32" Nullable="false" />
+          <Property Name="cbrand" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="QueryVender">
+          <Key>
+            <PropertyRef Name="venderid" />
+          </Key>
+          <Property Name="venderid" Type="Int32" Nullable="false" />
+          <Property Name="vendername" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="manager" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="bu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="region" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="area" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="office" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SalePointsCompare">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Brand" />
+            <PropertyRef Name="Status" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ContractNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BU" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Region" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ChannelType" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SalePointType" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Capacity" Type="Int32" />
+          <Property Name="M1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="M2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="M3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="M4" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Brand" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StartYearMonth" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EndYearMonth" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BeforeMonthCount" Type="Int32" />
+          <Property Name="TargetMonthCount" Type="Int32" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="IsNewPoint" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="SalePointsCompareCopy">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Brand" />
+            <PropertyRef Name="Status" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ContractNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BU" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Region" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ChannelType" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SalePointType" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Capacity" Type="Int32" />
+          <Property Name="M1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="M2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="M3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="M4" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Brand" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StartYearMonth" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EndYearMonth" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BeforeMonthCount" Type="Int32" />
+          <Property Name="TargetMonthCount" Type="Int32" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="IsNewPoint" Type="Boolean" />
+        </EntityType>
+        <EntityContainer Name="tptoolkitEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Brand" EntityType="Self.Brand" />
+          <EntitySet Name="BURegion" EntityType="Self.BURegion" />
+          <EntitySet Name="ChannelType" EntityType="Self.ChannelType" />
+          <EntitySet Name="MaterialGroup" EntityType="Self.MaterialGroup" />
+          <EntitySet Name="MaterialItem" EntityType="Self.MaterialItem" />
+          <EntitySet Name="NotifyMessage" EntityType="Self.NotifyMessage" />
+          <EntitySet Name="Permission" EntityType="Self.Permission" />
+          <EntitySet Name="RejectUserPic" EntityType="Self.RejectUserPic" />
+          <EntitySet Name="Role" EntityType="Self.Role" />
+          <EntitySet Name="RolePermission" EntityType="Self.RolePermission" />
+          <EntitySet Name="SalePoint" EntityType="Self.SalePoint" />
+          <EntitySet Name="SalePointFlow" EntityType="Self.SalePointFlow" />
+          <EntitySet Name="SalePointPic" EntityType="Self.SalePointPic" />
+          <EntitySet Name="SalePointType" EntityType="Self.SalePointType" />
+          <EntitySet Name="User" EntityType="Self.User" />
+          <EntitySet Name="UserFrom" EntityType="Self.UserFrom" />
+          <EntitySet Name="UserRole" EntityType="Self.UserRole" />
+          <EntitySet Name="UserVender" EntityType="Self.UserVender" />
+          <EntitySet Name="Vender" EntityType="Self.Vender" />
+          <EntitySet Name="VenderOrder" EntityType="Self.VenderOrder" />
+          <EntitySet Name="QueryProgram" EntityType="Self.QueryProgram" />
+          <EntitySet Name="QueryProgramBrand" EntityType="Self.QueryProgramBrand" />
+          <EntitySet Name="QueryVender" EntityType="Self.QueryVender" />
+          <EntitySet Name="SalePointsCompare" EntityType="Self.SalePointsCompare" />
+          <EntitySet Name="SalePointsCompareCopy" EntityType="Self.SalePointsCompareCopy" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EDMX1ModelStoreContainer" CdmEntityContainer="tptoolkitEntities">
+          <EntitySetMapping Name="Brand">
+            <EntityTypeMapping TypeName="EDMX1.Model.Brand">
+              <MappingFragment StoreEntitySet="Brand">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BURegion">
+            <EntityTypeMapping TypeName="EDMX1.Model.BURegion">
+              <MappingFragment StoreEntitySet="BURegion">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Key" ColumnName="Key" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="Bud_Win" ColumnName="Bud Win" />
+                <ScalarProperty Name="Core_Win" ColumnName="Core+Win" />
+                <ScalarProperty Name="UP" ColumnName="UP" />
+                <ScalarProperty Name="Bud_TT" ColumnName="Bud TT" />
+                <ScalarProperty Name="Core_TT" ColumnName="Core+TT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChannelType">
+            <EntityTypeMapping TypeName="EDMX1.Model.ChannelType">
+              <MappingFragment StoreEntitySet="ChannelType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MaterialGroup">
+            <EntityTypeMapping TypeName="EDMX1.Model.MaterialGroup">
+              <MappingFragment StoreEntitySet="MaterialGroup">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="SaleType" ColumnName="SaleType" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MaterialItem">
+            <EntityTypeMapping TypeName="EDMX1.Model.MaterialItem">
+              <MappingFragment StoreEntitySet="MaterialItem">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="GoldUrl" ColumnName="GoldUrl" />
+                <ScalarProperty Name="PlatUrl" ColumnName="PlatUrl" />
+                <ScalarProperty Name="SilverUrl" ColumnName="SilverUrl" />
+                <ScalarProperty Name="FamilyUrl" ColumnName="FamilyUrl" />
+                <ScalarProperty Name="SSUrl" ColumnName="SSUrl" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NotifyMessage">
+            <EntityTypeMapping TypeName="EDMX1.Model.NotifyMessage">
+              <MappingFragment StoreEntitySet="NotifyMessage">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="IsRead" ColumnName="IsRead" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Permission">
+            <EntityTypeMapping TypeName="EDMX1.Model.Permission">
+              <MappingFragment StoreEntitySet="Permission">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RejectUserPic">
+            <EntityTypeMapping TypeName="EDMX1.Model.RejectUserPic">
+              <MappingFragment StoreEntitySet="RejectUserPic">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="SalePointId" ColumnName="SalePointId" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="OperationId" ColumnName="OperationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Role">
+            <EntityTypeMapping TypeName="EDMX1.Model.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RolePermission">
+            <EntityTypeMapping TypeName="EDMX1.Model.RolePermission">
+              <MappingFragment StoreEntitySet="RolePermission">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="PermissionId" ColumnName="PermissionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SalePoint">
+            <EntityTypeMapping TypeName="EDMX1.Model.SalePoint">
+              <MappingFragment StoreEntitySet="SalePoint">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CreatorId" ColumnName="CreatorId" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="WCCS" ColumnName="WCCS" />
+                <ScalarProperty Name="SalePointTypeId" ColumnName="SalePointTypeId" />
+                <ScalarProperty Name="ChannelTypeId" ColumnName="ChannelTypeId" />
+                <ScalarProperty Name="UpTypesID" ColumnName="UpTypesID" />
+                <ScalarProperty Name="MaterialStandard" ColumnName="MaterialStandard" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="M1" ColumnName="M1" />
+                <ScalarProperty Name="M2" ColumnName="M2" />
+                <ScalarProperty Name="M3" ColumnName="M3" />
+                <ScalarProperty Name="M4" ColumnName="M4" />
+                <ScalarProperty Name="Capacity" ColumnName="Capacity" />
+                <ScalarProperty Name="Brand" ColumnName="Brand" />
+                <ScalarProperty Name="StartYearMonth" ColumnName="StartYearMonth" />
+                <ScalarProperty Name="Period" ColumnName="Period" />
+                <ScalarProperty Name="EndYearMonth" ColumnName="EndYearMonth" />
+                <ScalarProperty Name="TerminationYearMonth" ColumnName="TerminationYearMonth" />
+                <ScalarProperty Name="VenderId" ColumnName="VenderId" />
+                <ScalarProperty Name="Region" ColumnName="Region" />
+                <ScalarProperty Name="BU" ColumnName="BU" />
+                <ScalarProperty Name="ContractNo" ColumnName="ContractNo" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="IsHighEnd" ColumnName="IsHighEnd" />
+                <ScalarProperty Name="IsFinal" ColumnName="IsFinal" />
+                <ScalarProperty Name="IsMTBRefuseCount" ColumnName="IsMTBRefuseCount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SalePointFlow">
+            <EntityTypeMapping TypeName="EDMX1.Model.SalePointFlow">
+              <MappingFragment StoreEntitySet="SalePointFlow">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="SalePointId" ColumnName="SalePointId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="SalePointStatus" ColumnName="SalePointStatus" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SalePointPic">
+            <EntityTypeMapping TypeName="EDMX1.Model.SalePointPic">
+              <MappingFragment StoreEntitySet="SalePointPic">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="SalePointId" ColumnName="SalePointId" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="MaterialItemId" ColumnName="MaterialItemId" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SalePointType">
+            <EntityTypeMapping TypeName="EDMX1.Model.SalePointType">
+              <MappingFragment StoreEntitySet="SalePointType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="ChannelTypeId" ColumnName="ChannelTypeId" />
+                <ScalarProperty Name="BrandIds" ColumnName="BrandIds" />
+                <ScalarProperty Name="CHName" ColumnName="CHName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="EDMX1.Model.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="OpenId" ColumnName="OpenId" />
+                <ScalarProperty Name="BU" ColumnName="BU" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="HeadUrl" ColumnName="HeadUrl" />
+                <ScalarProperty Name="EmpNumber" ColumnName="EmpNumber" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Region" ColumnName="Region" />
+                <ScalarProperty Name="SuperiorId" ColumnName="SuperiorId" />
+                <ScalarProperty Name="FromID" ColumnName="FromID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserFrom">
+            <EntityTypeMapping TypeName="EDMX1.Model.UserFrom">
+              <MappingFragment StoreEntitySet="UserFrom">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="FromID" ColumnName="FromID" />
+                <ScalarProperty Name="CreateAt" ColumnName="CreateAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserRole">
+            <EntityTypeMapping TypeName="EDMX1.Model.UserRole">
+              <MappingFragment StoreEntitySet="UserRole">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserVender">
+            <EntityTypeMapping TypeName="EDMX1.Model.UserVender">
+              <MappingFragment StoreEntitySet="UserVender">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="VenderId" ColumnName="VenderId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vender">
+            <EntityTypeMapping TypeName="EDMX1.Model.Vender">
+              <MappingFragment StoreEntitySet="Vender">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="vCode" ColumnName="vCode" />
+                <ScalarProperty Name="vName" ColumnName="vName" />
+                <ScalarProperty Name="vDesc" ColumnName="vDesc" />
+                <ScalarProperty Name="searchindex" ColumnName="searchindex" />
+                <ScalarProperty Name="Region" ColumnName="Region" />
+                <ScalarProperty Name="BU" ColumnName="BU" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VenderOrder">
+            <EntityTypeMapping TypeName="EDMX1.Model.VenderOrder">
+              <MappingFragment StoreEntitySet="VenderOrder">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="VenderId" ColumnName="VenderId" />
+                <ScalarProperty Name="SalePointId" ColumnName="SalePointId" />
+                <ScalarProperty Name="StoreData" ColumnName="StoreData" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="DesignPic" ColumnName="DesignPic" />
+                <ScalarProperty Name="OrderDoc" ColumnName="OrderDoc" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="score" ColumnName="score" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QueryProgram">
+            <EntityTypeMapping TypeName="EDMX1.Model.QueryProgram">
+              <MappingFragment StoreEntitySet="QueryProgram">
+                <ScalarProperty Name="programid" ColumnName="programid" />
+                <ScalarProperty Name="myear" ColumnName="myear" />
+                <ScalarProperty Name="eprogram" ColumnName="eprogram" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QueryProgramBrand">
+            <EntityTypeMapping TypeName="EDMX1.Model.QueryProgramBrand">
+              <MappingFragment StoreEntitySet="QueryProgramBrand">
+                <ScalarProperty Name="programid" ColumnName="programid" />
+                <ScalarProperty Name="myear" ColumnName="myear" />
+                <ScalarProperty Name="brandid" ColumnName="brandid" />
+                <ScalarProperty Name="cbrand" ColumnName="cbrand" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QueryVender">
+            <EntityTypeMapping TypeName="EDMX1.Model.QueryVender">
+              <MappingFragment StoreEntitySet="QueryVender">
+                <ScalarProperty Name="venderid" ColumnName="venderid" />
+                <ScalarProperty Name="vendername" ColumnName="vendername" />
+                <ScalarProperty Name="manager" ColumnName="manager" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="bu" ColumnName="bu" />
+                <ScalarProperty Name="region" ColumnName="region" />
+                <ScalarProperty Name="area" ColumnName="area" />
+                <ScalarProperty Name="office" ColumnName="office" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SalePointsCompare">
+            <EntityTypeMapping TypeName="EDMX1.Model.SalePointsCompare">
+              <MappingFragment StoreEntitySet="SalePointsCompare">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ContractNo" ColumnName="ContractNo" />
+                <ScalarProperty Name="BU" ColumnName="BU" />
+                <ScalarProperty Name="Region" ColumnName="Region" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="ChannelType" ColumnName="ChannelType" />
+                <ScalarProperty Name="SalePointType" ColumnName="SalePointType" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Capacity" ColumnName="Capacity" />
+                <ScalarProperty Name="M1" ColumnName="M1" />
+                <ScalarProperty Name="M2" ColumnName="M2" />
+                <ScalarProperty Name="M3" ColumnName="M3" />
+                <ScalarProperty Name="M4" ColumnName="M4" />
+                <ScalarProperty Name="Brand" ColumnName="Brand" />
+                <ScalarProperty Name="StartYearMonth" ColumnName="StartYearMonth" />
+                <ScalarProperty Name="EndYearMonth" ColumnName="EndYearMonth" />
+                <ScalarProperty Name="BeforeMonthCount" ColumnName="BeforeMonthCount" />
+                <ScalarProperty Name="TargetMonthCount" ColumnName="TargetMonthCount" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="IsNewPoint" ColumnName="IsNewPoint" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SalePointsCompareCopy">
+            <EntityTypeMapping TypeName="EDMX1.Model.SalePointsCompareCopy">
+              <MappingFragment StoreEntitySet="SalePointsCompareCopy">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ContractNo" ColumnName="ContractNo" />
+                <ScalarProperty Name="BU" ColumnName="BU" />
+                <ScalarProperty Name="Region" ColumnName="Region" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="ChannelType" ColumnName="ChannelType" />
+                <ScalarProperty Name="SalePointType" ColumnName="SalePointType" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Capacity" ColumnName="Capacity" />
+                <ScalarProperty Name="M1" ColumnName="M1" />
+                <ScalarProperty Name="M2" ColumnName="M2" />
+                <ScalarProperty Name="M3" ColumnName="M3" />
+                <ScalarProperty Name="M4" ColumnName="M4" />
+                <ScalarProperty Name="Brand" ColumnName="Brand" />
+                <ScalarProperty Name="StartYearMonth" ColumnName="StartYearMonth" />
+                <ScalarProperty Name="EndYearMonth" ColumnName="EndYearMonth" />
+                <ScalarProperty Name="BeforeMonthCount" ColumnName="BeforeMonthCount" />
+                <ScalarProperty Name="TargetMonthCount" ColumnName="TargetMonthCount" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="IsNewPoint" ColumnName="IsNewPoint" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
